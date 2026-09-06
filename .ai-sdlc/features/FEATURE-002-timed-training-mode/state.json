@@ -3,34 +3,34 @@
   "feature_id": "FEATURE-002",
   "title": "Timed training mode",
   "created_at": "2026-09-06T20:38:05Z",
-  "updated_at": "2026-09-06T20:38:05Z",
+  "updated_at": "2026-09-06T20:42:35Z",
   "current_stage": "requirements",
   "waiting_for_human": true,
   "business_request": {
-    "revision": 1,
-    "sha256": "4c6144432fa29f97f26a799e65cb8dfaa65b9dc8fcde3d07fa3b99435acf091a",
+    "revision": 2,
+    "sha256": "3cad19b54114a659a0ac49cfffc1d6e2adbeb179431920b5618e6778d4c478a9",
     "path": "01-business-request.md",
-    "synced_at": "2026-09-06T20:38:05Z"
+    "synced_at": "2026-09-06T20:42:34Z"
   },
   "artifacts": {
     "requirements": {
       "status": "waiting_for_human",
-      "latest_revision": 1,
+      "latest_revision": 2,
       "current": {
-        "revision": 1,
-        "sha256": "ad63d3975ce9f5f9e50b3fc5173a1ff50c65c0cb3a3e6e184cda8f77c1f1581a",
+        "revision": 2,
+        "sha256": "2c47c7e39698354c83bc39999b86044ad18cd2c2ec4f45e2d04c9dec369da933",
         "path": "02-functional-spec.md",
-        "snapshot": "revisions/requirements/rev-001.md",
-        "submitted_at": "2026-09-06T20:38:05Z"
+        "snapshot": "revisions/requirements/rev-002.md",
+        "submitted_at": "2026-09-06T20:42:34Z"
       },
       "ai_review": {
         "verdict": "approved",
-        "revision": 1,
-        "sha256": "ad63d3975ce9f5f9e50b3fc5173a1ff50c65c0cb3a3e6e184cda8f77c1f1581a",
-        "at": "2026-09-06T20:38:05Z",
+        "revision": 2,
+        "sha256": "2c47c7e39698354c83bc39999b86044ad18cd2c2ec4f45e2d04c9dec369da933",
+        "at": "2026-09-06T20:42:35Z",
         "feedback": {
-          "path": "reviews/requirements-ai-r001-20260906T203805Z.md",
-          "sha256": "07dba3287512f2dfb4a4e20311c442277197e3dad1b84a419c27e524367f3dbb"
+          "path": "reviews/requirements-ai-r002-20260906T204235Z.md",
+          "sha256": "25d8ae9a4989f451f8194db2fb7793d0bb244e1e8c716f468ee60153039bab45"
         }
       },
       "human_review": null,
@@ -44,6 +44,28 @@
           "feedback": {
             "path": "reviews/requirements-ai-r001-20260906T203805Z.md",
             "sha256": "07dba3287512f2dfb4a4e20311c442277197e3dad1b84a419c27e524367f3dbb"
+          }
+        },
+        {
+          "kind": "human",
+          "verdict": "changes_requested",
+          "revision": 1,
+          "sha256": "ad63d3975ce9f5f9e50b3fc5173a1ff50c65c0cb3a3e6e184cda8f77c1f1581a",
+          "at": "2026-09-06T20:42:34Z",
+          "feedback": {
+            "path": "reviews/requirements-human-r001-20260906T204234Z.md",
+            "sha256": "503f8a3ba34ad0e487a7dc4245cb82d1016480e675ec766e9a4c157fa911665f"
+          }
+        },
+        {
+          "kind": "ai",
+          "verdict": "approved",
+          "revision": 2,
+          "sha256": "2c47c7e39698354c83bc39999b86044ad18cd2c2ec4f45e2d04c9dec369da933",
+          "at": "2026-09-06T20:42:35Z",
+          "feedback": {
+            "path": "reviews/requirements-ai-r002-20260906T204235Z.md",
+            "sha256": "25d8ae9a4989f451f8194db2fb7793d0bb244e1e8c716f468ee60153039bab45"
           }
         }
       ],
@@ -114,6 +136,35 @@
       "kind": "ai",
       "verdict": "approved",
       "revision": 1
+    },
+    {
+      "at": "2026-09-06T20:42:34Z",
+      "action": "decide",
+      "stage": "requirements",
+      "kind": "human",
+      "verdict": "changes_requested",
+      "revision": 1
+    },
+    {
+      "at": "2026-09-06T20:42:34Z",
+      "action": "sync-business-request",
+      "revision": 2,
+      "sha256": "3cad19b54114a659a0ac49cfffc1d6e2adbeb179431920b5618e6778d4c478a9"
+    },
+    {
+      "at": "2026-09-06T20:42:34Z",
+      "action": "submit",
+      "stage": "requirements",
+      "revision": 2,
+      "sha256": "2c47c7e39698354c83bc39999b86044ad18cd2c2ec4f45e2d04c9dec369da933"
+    },
+    {
+      "at": "2026-09-06T20:42:35Z",
+      "action": "decide",
+      "stage": "requirements",
+      "kind": "ai",
+      "verdict": "approved",
+      "revision": 2
     }
   ]
 }
