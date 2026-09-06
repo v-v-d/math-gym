@@ -3,8 +3,8 @@
   "feature_id": "FEATURE-002",
   "title": "Timed training mode",
   "created_at": "2026-09-06T20:38:05Z",
-  "updated_at": "2026-09-06T22:19:36Z",
-  "current_stage": "design",
+  "updated_at": "2026-09-06T22:21:35Z",
+  "current_stage": "architecture",
   "waiting_for_human": true,
   "business_request": {
     "revision": 2,
@@ -78,7 +78,7 @@
       "stale": false
     },
     "design": {
-      "status": "waiting_for_human",
+      "status": "approved",
       "latest_revision": 3,
       "current": {
         "revision": 3,
@@ -97,7 +97,13 @@
           "sha256": "6a5177ed73290274132075be8e2d6507372670d20954f2e52d907a0ef27e9103"
         }
       },
-      "human_review": null,
+      "human_review": {
+        "verdict": "approved",
+        "revision": 3,
+        "sha256": "e08275f6ae867003d23335c2e4afdad493ddc3e17bb50d3d96bba836f46c6960",
+        "at": "2026-09-06T22:21:35Z",
+        "feedback": null
+      },
       "feedback": [
         {
           "kind": "ai",
@@ -158,12 +164,39 @@
       "stale": false
     },
     "architecture": {
-      "status": "not_started",
-      "latest_revision": 0,
-      "current": null,
-      "ai_review": null,
+      "status": "waiting_for_human",
+      "latest_revision": 1,
+      "current": {
+        "revision": 1,
+        "sha256": "688fe1c6fc86f622bf840f3a4df1a53a24ff9b9ab6abdd21f5e9bc2188e81fff",
+        "path": "04-architecture.md",
+        "snapshot": "revisions/architecture/rev-001.md",
+        "submitted_at": "2026-09-06T22:21:35Z"
+      },
+      "ai_review": {
+        "verdict": "approved",
+        "revision": 1,
+        "sha256": "688fe1c6fc86f622bf840f3a4df1a53a24ff9b9ab6abdd21f5e9bc2188e81fff",
+        "at": "2026-09-06T22:21:35Z",
+        "feedback": {
+          "path": "reviews/architecture-ai-r001-20260906T222135Z.md",
+          "sha256": "33a680a86e93c8ffa21caf007759387aa646ca9158ad4ee666385fb814e61cdb"
+        }
+      },
       "human_review": null,
-      "feedback": [],
+      "feedback": [
+        {
+          "kind": "ai",
+          "verdict": "approved",
+          "revision": 1,
+          "sha256": "688fe1c6fc86f622bf840f3a4df1a53a24ff9b9ab6abdd21f5e9bc2188e81fff",
+          "at": "2026-09-06T22:21:35Z",
+          "feedback": {
+            "path": "reviews/architecture-ai-r001-20260906T222135Z.md",
+            "sha256": "33a680a86e93c8ffa21caf007759387aa646ca9158ad4ee666385fb814e61cdb"
+          }
+        }
+      ],
       "stale": false
     },
     "test_plan": {
@@ -311,6 +344,29 @@
       "kind": "ai",
       "verdict": "approved",
       "revision": 3
+    },
+    {
+      "at": "2026-09-06T22:21:35Z",
+      "action": "decide",
+      "stage": "design",
+      "kind": "human",
+      "verdict": "approved",
+      "revision": 3
+    },
+    {
+      "at": "2026-09-06T22:21:35Z",
+      "action": "submit",
+      "stage": "architecture",
+      "revision": 1,
+      "sha256": "688fe1c6fc86f622bf840f3a4df1a53a24ff9b9ab6abdd21f5e9bc2188e81fff"
+    },
+    {
+      "at": "2026-09-06T22:21:35Z",
+      "action": "decide",
+      "stage": "architecture",
+      "kind": "ai",
+      "verdict": "approved",
+      "revision": 1
     }
   ]
 }
