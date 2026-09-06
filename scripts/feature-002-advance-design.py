@@ -1,0 +1,316 @@
+from pathlib import Path
+import json
+import subprocess
+
+pipeline = Path('.feature-pipeline/scripts/pipeline.py')
+feature = Path('.ai-sdlc/features/FEATURE-002-timed-training-mode')
+
+subprocess.run(['python3', str(pipeline), 'status', '--feature-dir', str(feature)], check=True)
+state = json.loads((feature / 'state.json').read_text(encoding='utf-8'))
+req = state['artifacts']['requirements']
+assert state['current_stage'] == 'requirements'
+assert req['status'] == 'waiting_for_human'
+assert req['current']['revision'] == 2
+assert req['current']['sha256'] == '2c47c7e39698354c83bc39999b86044ad18cd2c2ec4f45e2d04c9dec369da933'
+
+subprocess.run([
+    'python3', str(pipeline), 'decide', '--feature-dir', str(feature),
+    '--stage', 'requirements', '--kind', 'human', '--verdict', 'approved'
+], check=True)
+
+design = Path('/tmp/feature-002-ux-spec.md')
+design.write_text('''# UX/UI specification
+
+- Feature ID: FEATURE-002
+- Revision: 1
+- Input revisions: requirements revision 2 / SHA-256: 2c47c7e39698354c83bc39999b86044ad18cd2c2ec4f45e2d04c9dec369da933
+- Author role: Designer
+
+## Design goals and constraints
+
+- Добавить timed-режим, не ломая визуальную модель и основной путь FEATURE-001.
+- Сделать выбор режима понятным до старта, не превращая стартовый экран в сложную форму.
+- В timed-сессии держать таймер постоянно видимым, но не конкурирующим с математическим выражением.
+- После каждого принятого ответа мгновенно переводить пользователя к следующей задаче без промежуточного экрана.
+- На timeout однозначно объяснить причину завершения и показать два результата: сколько решено и сколько правильно.
+- Сохранить текущую клавиатуру, правила ввода, кнопки результата и mobile-first компоновку.
+- Не использовать анимации или live-announcements, которые отвлекают от быстрого решения.
+
+## Requirement mapping
+
+| Requirement | UX coverage |
+|---|---|
+| FR-001 | SCREEN-001: явный выбор `Обычный` / `На время` перед стартом |
+| FR-002 | FLOW-002, SCREEN-002: после каждого submit до дедлайна без паузы показывается следующий пример |
+| FR-003 | UX не показывает повторы как отдельное состояние; политика уникальности прозрачна пользователю и не требует управления |
+| FR-004 | SCREEN-002: таймер отображает остаток от абсолютного дедлайна |
+| FR-005 | SCREEN-002: постоянно видимый `Осталось 0:SS` |
+| FR-006 | FLOW-003, SCREEN-003: автоматический переход на результат при timeout |
+| FR-007 | FLOW-003: введенный, но не принятый к дедлайну ответ отбрасывается |
+| FR-008 | SCREEN-003: `Правильно X` + `Решено Y` |
+| FR-009 | SCREEN-003: `Еще раз` и `Выбрать класс и режим` |
+| FR-010 | FLOW-001: обычный режим сохраняет существующий экран и `N из 10` |
+| FR-011 | Accessibility: timer не является ежесекундным live region; timeout объявляется отдельно |
+| FR-012 | Видимых analytics controls нет; UX не добавляет персональные данные |
+
+## User journeys
+
+### FLOW-001 Выбор обычного режима
+
+1. Пользователь открывает стартовый экран.
+2. Выбирает класс.
+3. В блоке `Режим` выбирает `Обычный`.
+4. Нажимает `Начать`.
+5. Дальнейший UX полностью соответствует FEATURE-001: `1 из 10` ... `10 из 10`, без таймера.
+
+### FLOW-002 Timed-тренировка
+
+1. Пользователь выбирает класс.
+2. Выбирает `На время`.
+3. Под названием режима видит пояснение `Решай столько примеров, сколько успеешь за 60 секунд`.
+4. Нажимает `Начать`.
+5. Открывается SCREEN-002 с первым примером и таймером `Осталось 1:00`.
+6. Пользователь вводит ответ и нажимает `Готово` либо Enter.
+7. Если ответ принят до дедлайна, текущий пример немедленно заменяется следующим; поле ответа очищается; фокус остается в рабочем сценарии.
+8. Пользователь продолжает до timeout независимо от числа уже решенных примеров.
+
+### FLOW-003 Автозавершение
+
+1. В timed-сессии достигается дедлайн.
+2. Любое введенное, но не принятое значение перестает быть активным и не учитывается.
+3. Интерактивные элементы упражнения становятся недоступны на время перехода.
+4. Приложение автоматически показывает SCREEN-003.
+5. Screen reader получает единичное сообщение `Время вышло. Правильно X, решено Y.`.
+
+### FLOW-004 Повтор
+
+1. На SCREEN-003 пользователь нажимает `Еще раз`.
+2. Стартует новая timed-сессия того же класса с `Осталось 1:00`, счетчики результата начинаются заново.
+3. `Выбрать класс и режим` возвращает на SCREEN-001 без сохранения прошлой сессии.
+
+## Navigation
+
+`SCREEN-001 Start` → (`Обычный`) → существующий FEATURE-001 exercise/result.
+
+`SCREEN-001 Start` → (`На время`) → `SCREEN-002 Timed exercise` → автоматически по timeout → `SCREEN-003 Timed result`.
+
+`SCREEN-003 Timed result` → `Еще раз` → `SCREEN-002 Timed exercise`.
+
+`SCREEN-003 Timed result` → `Выбрать класс и режим` → `SCREEN-001 Start`.
+
+Reload на SCREEN-002 ведет в обычное начальное состояние SCREEN-001.
+
+## Screens
+
+### SCREEN-001 Старт / выбор класса и режима
+
+Сохраняется существующая карточка и заголовок `Математический тренажер`.
+
+Порядок элементов:
+1. `Выбери класс` и существующие карточки `1 класс`, `2 класс`.
+2. Под ними секция с заголовком `Режим`.
+3. Две карточки выбора:
+   - `Обычный` — `10 примеров без ограничения времени`;
+   - `На время` — `60 секунд · решай столько, сколько успеешь`.
+4. Основная кнопка `Начать`.
+
+Поведение:
+- каждая пара выбора оформляется как доступная radio-group;
+- старт недоступен, пока не выбраны и класс, и режим;
+- режим по умолчанию не выбран, чтобы timed-ограничение нельзя было включить случайно;
+- при возврате через `Выбрать класс и режим` выбор сбрасывается.
+
+### SCREEN-002 Timed exercise
+
+Карточка упражнения сохраняет знакомую структуру FEATURE-001.
+
+Верхняя часть:
+- заголовок `Математический тренажер`;
+- вместо прогресса `N из 10` отображается строка состояния:
+  - `Решено: N`;
+  - визуально более заметно `Осталось 0:SS`.
+
+Основная часть:
+- текущее математическое выражение;
+- отображение введенного ответа;
+- существующая цифровая клавиатура, `Стереть`, `Готово`.
+
+Таймер:
+- начальное отображение `Осталось 1:00`;
+- далее `0:59` ... `0:01` ... `0:00`;
+- никогда не отображает отрицательные значения;
+- на последних 10 секундах может получить визуальное усиление только цветом/weight, без мигания и layout shift;
+- UI-tick не определяет бизнес-дедлайн.
+
+Переход между примерами:
+- после submit expression и answer меняются в той же карточке;
+- ответ очищается;
+- `Решено: N` увеличивается только после принятого ответа;
+- отдельный success/error feedback по правильности не показывается;
+- никаких модальных окон и кнопки `Следующий` нет.
+
+### SCREEN-003 Timed result
+
+Контент:
+- header `Математический тренажер`;
+- иконка/маркер завершения без смысловой зависимости от цвета;
+- заголовок `Время вышло!`;
+- основной результат `Правильно: X`;
+- вторичный результат `Решено: Y`;
+- при `Y > 0` допустимо дополнительно показать `Точность: Z%`, но это не обязательный результат и не заменяет X/Y;
+- кнопка `Еще раз`;
+- кнопка `Выбрать класс и режим`.
+
+Для результата `0 / 0` используется нейтральный текст без негативной оценки: `За эту минуту ответы не были отправлены. Попробуй еще раз.`
+
+## Component behavior
+
+### MODE-SELECTOR-001
+
+- Radio group `Режим тренировки`.
+- Options: `ordinary`, `timed`.
+- Визуально использует тот же паттерн selectable cards, что выбор класса.
+- Полностью управляется клавиатурой и имеет `aria-checked`.
+
+### TIMER-001
+
+- Видим только для timed.
+- Отображает `Осталось M:SS`.
+- Имеет программное имя для assistive technology, но не `aria-live` на каждое изменение.
+- Последние 10 секунд: допустим одноразовый live-announcement `Осталось 10 секунд`, если реализация не создает дублей; это enhancement, не acceptance requirement.
+
+### SOLVED-COUNTER-001
+
+- Отображает число принятых ответов `Решено: N`.
+- Не является live region.
+
+### KEYPAD-001
+
+- Поведение без изменений относительно FEATURE-001.
+- После timeout кнопки больше не принимают ввод.
+
+### RESULT-STATS-001
+
+- Два самостоятельных показателя `Правильно` и `Решено`.
+- Не использовать формат `X из 10` в timed-режиме.
+
+## Content
+
+Основные строки:
+- `Режим`
+- `Обычный`
+- `10 примеров без ограничения времени`
+- `На время`
+- `60 секунд · решай столько, сколько успеешь`
+- `Осталось 1:00`
+- `Решено: 0`
+- `Время вышло!`
+- `Правильно: X`
+- `Решено: Y`
+- `Еще раз`
+- `Выбрать класс и режим`
+
+Тон остается коротким, нейтральным и понятным ребенку; не использовать формулировки `не успел`, `проиграл`, `ошибка` для штатного timeout.
+
+## Accessibility
+
+- Выбор класса и режима — отдельные `radiogroup` с понятными accessible names.
+- Все selectable cards имеют видимое focus state и корректный `aria-checked`.
+- Таймер доступен через обычный текст/label, но не обновляет live region ежесекундно.
+- Timeout должен вызвать один `role=status`/`aria-live=polite` announcement с итогом.
+- Контраст таймера и last-10-seconds state должен соответствовать WCAG AA; цвет не единственный носитель информации.
+- Кнопки keypad сохраняют текущие accessible labels.
+- При переходе на результат фокус переводится на `Еще раз` либо на заголовок результата согласно существующему focus pattern; screen-reader announcement не дублируется.
+- Keyboard submit Enter до дедлайна работает как `Готово`; после дедлайна не принимает ответ.
+
+## Responsive behavior
+
+- Целевой диапазон сохраняет текущий минимум 320 px.
+- SCREEN-001: карточки режима идут вертикально на узких экранах.
+- SCREEN-002: timer/solved status не должен уменьшать expression или keypad; при 320–380 px status допускается в две строки.
+- Таймер не должен менять ширину контейнера при `1:00` → `0:59`; использовать стабильную ширину или tabular numerals.
+- SCREEN-003: stats вертикально на mobile; основные CTA сохраняют full-width layout.
+
+## Loading / empty / error / validation / permission states
+
+- Loading: отдельного сетевого loading нет; каталог локальный.
+- Start validation: `Начать` disabled/aria-disabled, пока не выбраны класс и режим.
+- Start error: используется существующее сообщение `Не удалось начать занятие. Попробуйте позже.`; таймер в этом состоянии отсутствует.
+- Empty answer: `Готово` недоступно как в FEATURE-001.
+- Timeout: штатный end-state, не error; автоматический переход на SCREEN-003.
+- Catalog/next-task technical failure во время timed-сессии: не выдавать обычный результат как будто истекло время; показать отдельное error-state с `Попробовать снова` / `Выбрать класс и режим`.
+- Permissions: permission states отсутствуют, потому что приложение не использует auth/roles.
+- Reload: возврат на SCREEN-001 без resume banner.
+
+## Prototype evidence
+
+Отдельный интерактивный prototype не требуется для revision 1: изменение укладывается в существующую UI-систему selectable cards, exercise card, keypad и result card. Перед implementation визуальная проверка должна быть выполнена в реальном приложении на desktop и 320–380 px mobile width.
+
+## Assumptions
+
+- UX принимает утвержденную requirements-семантику: timed — дополнительный режим, результат содержит correct_count и solved_count, задачи не повторяются до исчерпания пула, countdown стартует вместе с первым активным timed-task.
+- Ordinary mode сохраняет текущий visual treatment FEATURE-001, кроме появления mode selector перед стартом.
+- Процент точности — только optional secondary information; он не должен мешать обязательным X/Y.
+
+## Open questions
+
+- Q-UX-001: Нужен ли дополнительный показатель `Точность Z%` на результате? В revision 1 он оставлен optional и не влияет на acceptance.
+- Q-UX-002: Нужна ли визуальная индикация последних 10 секунд более сильная, чем weight/color? Моргание намеренно исключено из-за accessibility и отвлечения.
+''', encoding='utf-8')
+
+subprocess.run([
+    'python3', str(pipeline), 'submit', '--feature-dir', str(feature),
+    '--stage', 'design', '--source', str(design)
+], check=True)
+
+state = json.loads((feature / 'state.json').read_text(encoding='utf-8'))
+meta = state['artifacts']['design']['current']
+review = Path('/tmp/feature-002-design-review.md')
+review.write_text(f'''# Independent AI review
+
+- Feature ID: FEATURE-002
+- Artifact / item: design
+- Reviewed revision/hash: {meta['revision']} / SHA-256: {meta['sha256']}
+- Reviewer role: Design reviewer
+- Verdict: approved
+
+## Findings
+
+No blocking or high findings.
+
+### FINDING-001 Optional accuracy metric should remain non-primary
+- Severity: low
+- Location / stable ID: SCREEN-003, RESULT-STATS-001, Q-UX-001
+- Evidence: Approved requirements require both correct_count and solved_count, but do not require percentage accuracy. UX keeps percentage optional and explicitly prevents it from replacing mandatory X/Y.
+- Required change: None before human gate. Human may approve without accuracy percentage or request a fixed product decision.
+- Affected upstream/downstream IDs: FR-008, future implementation and E2E result assertions.
+
+### FINDING-002 Last-10-seconds emphasis is intentionally bounded
+- Severity: low
+- Location / stable ID: TIMER-001, Q-UX-002
+- Evidence: Requirements require a visible accessible timer but do not prescribe urgency animation. The design allows weight/color emphasis and excludes flashing/layout shift, reducing distraction and accessibility risk.
+- Required change: None before human gate.
+- Affected upstream/downstream IDs: FR-005, FR-011.
+
+## Review summary
+
+- Requirement mapping covers FR-001..FR-012.
+- Main timed journey, ordinary regression path, timeout, repeat, reload, start error and technical next-task failure are represented.
+- Navigation has no dead-end and preserves FEATURE-001 post-result actions.
+- Accessibility explicitly prevents per-second live announcements and preserves keyboard/focus behavior.
+- Responsive behavior addresses the existing 320 px minimum and prevents timer layout shift.
+- Proposed controls reuse current selectable-card/keypad/result patterns and are implementation-feasible in the existing SPA.
+
+## Open questions
+
+- Q-UX-001: Human approval may confirm that accuracy percentage is optional/non-primary; mandatory result remains `Правильно X` + `Решено Y`.
+- Q-UX-002: Human approval may confirm no flashing countdown; last 10 seconds may use only bounded visual emphasis.
+''', encoding='utf-8')
+
+subprocess.run([
+    'python3', str(pipeline), 'decide', '--feature-dir', str(feature),
+    '--stage', 'design', '--kind', 'ai', '--verdict', 'approved',
+    '--feedback-file', str(review)
+], check=True)
+
+subprocess.run(['python3', str(pipeline), 'status', '--feature-dir', str(feature)], check=True)
