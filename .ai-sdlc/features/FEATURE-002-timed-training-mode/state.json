@@ -3,8 +3,8 @@
   "feature_id": "FEATURE-002",
   "title": "Timed training mode",
   "created_at": "2026-09-06T20:38:05Z",
-  "updated_at": "2026-09-06T20:42:35Z",
-  "current_stage": "requirements",
+  "updated_at": "2026-09-06T21:03:09Z",
+  "current_stage": "design",
   "waiting_for_human": true,
   "business_request": {
     "revision": 2,
@@ -14,7 +14,7 @@
   },
   "artifacts": {
     "requirements": {
-      "status": "waiting_for_human",
+      "status": "approved",
       "latest_revision": 2,
       "current": {
         "revision": 2,
@@ -33,7 +33,13 @@
           "sha256": "25d8ae9a4989f451f8194db2fb7793d0bb244e1e8c716f468ee60153039bab45"
         }
       },
-      "human_review": null,
+      "human_review": {
+        "verdict": "approved",
+        "revision": 2,
+        "sha256": "2c47c7e39698354c83bc39999b86044ad18cd2c2ec4f45e2d04c9dec369da933",
+        "at": "2026-09-06T21:03:09Z",
+        "feedback": null
+      },
       "feedback": [
         {
           "kind": "ai",
@@ -72,12 +78,39 @@
       "stale": false
     },
     "design": {
-      "status": "not_started",
-      "latest_revision": 0,
-      "current": null,
-      "ai_review": null,
+      "status": "waiting_for_human",
+      "latest_revision": 1,
+      "current": {
+        "revision": 1,
+        "sha256": "78590e88ccd941f9bf190dd3bbc0e096af3f8e69396ea792c536703ad59ca0bb",
+        "path": "03-ux-spec.md",
+        "snapshot": "revisions/design/rev-001.md",
+        "submitted_at": "2026-09-06T21:03:09Z"
+      },
+      "ai_review": {
+        "verdict": "approved",
+        "revision": 1,
+        "sha256": "78590e88ccd941f9bf190dd3bbc0e096af3f8e69396ea792c536703ad59ca0bb",
+        "at": "2026-09-06T21:03:09Z",
+        "feedback": {
+          "path": "reviews/design-ai-r001-20260906T210309Z.md",
+          "sha256": "03e340e680dc2e425a667ce0cfeedb824fee371543d90a501bcfa11c8e9a0337"
+        }
+      },
       "human_review": null,
-      "feedback": [],
+      "feedback": [
+        {
+          "kind": "ai",
+          "verdict": "approved",
+          "revision": 1,
+          "sha256": "78590e88ccd941f9bf190dd3bbc0e096af3f8e69396ea792c536703ad59ca0bb",
+          "at": "2026-09-06T21:03:09Z",
+          "feedback": {
+            "path": "reviews/design-ai-r001-20260906T210309Z.md",
+            "sha256": "03e340e680dc2e425a667ce0cfeedb824fee371543d90a501bcfa11c8e9a0337"
+          }
+        }
+      ],
       "stale": false
     },
     "architecture": {
@@ -165,6 +198,29 @@
       "kind": "ai",
       "verdict": "approved",
       "revision": 2
+    },
+    {
+      "at": "2026-09-06T21:03:09Z",
+      "action": "decide",
+      "stage": "requirements",
+      "kind": "human",
+      "verdict": "approved",
+      "revision": 2
+    },
+    {
+      "at": "2026-09-06T21:03:09Z",
+      "action": "submit",
+      "stage": "design",
+      "revision": 1,
+      "sha256": "78590e88ccd941f9bf190dd3bbc0e096af3f8e69396ea792c536703ad59ca0bb"
+    },
+    {
+      "at": "2026-09-06T21:03:09Z",
+      "action": "decide",
+      "stage": "design",
+      "kind": "ai",
+      "verdict": "approved",
+      "revision": 1
     }
   ]
 }
