@@ -3,7 +3,7 @@
   "feature_id": "FEATURE-002",
   "title": "Timed training mode",
   "created_at": "2026-09-06T20:38:05Z",
-  "updated_at": "2026-09-06T21:53:39Z",
+  "updated_at": "2026-09-06T22:19:36Z",
   "current_stage": "design",
   "waiting_for_human": true,
   "business_request": {
@@ -79,22 +79,22 @@
     },
     "design": {
       "status": "waiting_for_human",
-      "latest_revision": 2,
+      "latest_revision": 3,
       "current": {
-        "revision": 2,
-        "sha256": "87723b44d79b82d9719883ce68d9729a09e765d4597ac9fa2d3385fb4006b5a1",
+        "revision": 3,
+        "sha256": "e08275f6ae867003d23335c2e4afdad493ddc3e17bb50d3d96bba836f46c6960",
         "path": "03-ux-spec.md",
-        "snapshot": "revisions/design/rev-002.md",
-        "submitted_at": "2026-09-06T21:53:39Z"
+        "snapshot": "revisions/design/rev-003.md",
+        "submitted_at": "2026-09-06T22:19:36Z"
       },
       "ai_review": {
         "verdict": "approved",
-        "revision": 2,
-        "sha256": "87723b44d79b82d9719883ce68d9729a09e765d4597ac9fa2d3385fb4006b5a1",
-        "at": "2026-09-06T21:53:39Z",
+        "revision": 3,
+        "sha256": "e08275f6ae867003d23335c2e4afdad493ddc3e17bb50d3d96bba836f46c6960",
+        "at": "2026-09-06T22:19:36Z",
         "feedback": {
-          "path": "reviews/design-ai-r002-20260906T215339Z.md",
-          "sha256": "5f19eea1bae9183fecf0cc6f90fd0ea90b6dee0cfa80ad3666ab1d1df7cd295f"
+          "path": "reviews/design-ai-r003-20260906T221936Z.md",
+          "sha256": "6a5177ed73290274132075be8e2d6507372670d20954f2e52d907a0ef27e9103"
         }
       },
       "human_review": null,
@@ -130,6 +130,28 @@
           "feedback": {
             "path": "reviews/design-ai-r002-20260906T215339Z.md",
             "sha256": "5f19eea1bae9183fecf0cc6f90fd0ea90b6dee0cfa80ad3666ab1d1df7cd295f"
+          }
+        },
+        {
+          "kind": "human",
+          "verdict": "changes_requested",
+          "revision": 2,
+          "sha256": "87723b44d79b82d9719883ce68d9729a09e765d4597ac9fa2d3385fb4006b5a1",
+          "at": "2026-09-06T22:19:36Z",
+          "feedback": {
+            "path": "reviews/design-human-r002-20260906T221936Z.md",
+            "sha256": "dbe7160340ae1c717e4711791840a7373352ffde01db7488ef6c7394cb3b60f1"
+          }
+        },
+        {
+          "kind": "ai",
+          "verdict": "approved",
+          "revision": 3,
+          "sha256": "e08275f6ae867003d23335c2e4afdad493ddc3e17bb50d3d96bba836f46c6960",
+          "at": "2026-09-06T22:19:36Z",
+          "feedback": {
+            "path": "reviews/design-ai-r003-20260906T221936Z.md",
+            "sha256": "6a5177ed73290274132075be8e2d6507372670d20954f2e52d907a0ef27e9103"
           }
         }
       ],
@@ -266,6 +288,29 @@
       "kind": "ai",
       "verdict": "approved",
       "revision": 2
+    },
+    {
+      "at": "2026-09-06T22:19:36Z",
+      "action": "decide",
+      "stage": "design",
+      "kind": "human",
+      "verdict": "changes_requested",
+      "revision": 2
+    },
+    {
+      "at": "2026-09-06T22:19:36Z",
+      "action": "submit",
+      "stage": "design",
+      "revision": 3,
+      "sha256": "e08275f6ae867003d23335c2e4afdad493ddc3e17bb50d3d96bba836f46c6960"
+    },
+    {
+      "at": "2026-09-06T22:19:36Z",
+      "action": "decide",
+      "stage": "design",
+      "kind": "ai",
+      "verdict": "approved",
+      "revision": 3
     }
   ]
 }
