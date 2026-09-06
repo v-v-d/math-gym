@@ -1,0 +1,130 @@
+name: feature-002-design-r3
+
+on:
+  push:
+    branches:
+      - feature/FEATURE-002-timed-training
+
+permissions:
+  contents: write
+
+jobs:
+  advance:
+    if: ${{ github.actor != 'github-actions[bot]' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/FEATURE-002-timed-training
+      - uses: actions/checkout@v4
+        with:
+          repository: v-v-d/ai-workflow
+          ref: main
+          path: .feature-pipeline
+      - name: Submit design revision 3 with exact approved mockups
+        run: |
+          set -euo pipefail
+          FEATURE=.ai-sdlc/features/FEATURE-002-timed-training-mode
+          PIPELINE=.feature-pipeline/scripts/pipeline.py
+
+          cp "$FEATURE/03-ux-spec.md" /tmp/design-r3.md
+
+          cat > /tmp/design-human-feedback.md <<'EOF'
+          # Human review feedback
+
+          - Feature ID: FEATURE-002
+          - Artifact / item: design
+          - Reviewed revision/hash: 2 / SHA-256: 87723b44d79b82d9719883ce68d9729a09e765d4597ac9fa2d3385fb4006b5a1
+          - Reviewer role: Human approver
+          - Verdict: changes_requested
+
+          ## Feedback
+
+          Использовать именно три предоставленных пользователем визуальных макета и сделать их частью UX/UI specification. Ранее созданные альтернативные SVG-макеты не являются утверждаемым визуальным контрактом.
+          EOF
+
+          python3 "$PIPELINE" decide \
+            --feature-dir "$FEATURE" \
+            --stage design \
+            --kind human \
+            --verdict changes_requested \
+            --feedback-file /tmp/design-human-feedback.md
+
+          python3 "$PIPELINE" submit \
+            --feature-dir "$FEATURE" \
+            --stage design \
+            --source /tmp/design-r3.md
+
+          CURRENT_SHA=$(python3 - <<'PY'
+          import json
+          from pathlib import Path
+          s=json.loads(Path('.ai-sdlc/features/FEATURE-002-timed-training-mode/state.json').read_text())
+          print(s['artifacts']['design']['current']['sha256'])
+          PY
+          )
+
+          cat > /tmp/design-ai-review.md <<EOF
+          # Independent AI review
+
+          - Feature ID: FEATURE-002
+          - Artifact / item: design
+          - Reviewed revision/hash: 3 / SHA-256: ${CURRENT_SHA}
+          - Reviewer role: Design reviewer
+          - Verdict: approved
+
+          ## Findings
+
+          No blocking or high findings.
+
+          ### FINDING-001 Exact user-provided mockups are now part of the design contract
+          - Severity: low
+          - Location / stable ID: SCREEN-001, SCREEN-002, SCREEN-003, Prototype / mockup evidence
+          - Evidence: Revision 3 embeds repository-native copies of the exact three mockups selected by the human approver and references them inline from the UX/UI specification.
+          - Required change: None before human gate.
+          - Affected upstream/downstream IDs: FR-001, FR-002, FR-005, FR-006, FR-008, architecture, implementation, E2E visual verification.
+
+          ### FINDING-002 Accuracy remains secondary
+          - Severity: low
+          - Location / stable ID: SCREEN-003, RESULT-STATS-001, Q-UX-002
+          - Evidence: The result mockup includes accuracy, while the design contract still keeps `Правильно X` and `Решено Y` mandatory and `Точность Z%` secondary/optional.
+          - Required change: None before human gate.
+          - Affected upstream/downstream IDs: FR-008, test plan.
+
+          ### FINDING-003 Mockups are sufficiently concrete for architecture handoff
+          - Severity: low
+          - Location / stable ID: Visual language, Prototype / mockup evidence
+          - Evidence: The mockups make layout, hierarchy, controls, timer prominence, result hierarchy and visual tone explicit while allowing implementation-level adaptation of decorative assets.
+          - Required change: None before human gate.
+          - Affected upstream/downstream IDs: architecture and implementation task decomposition.
+
+          ## Review summary
+
+          - Requirement mapping covers FR-001..FR-012.
+          - Exact user-selected visual references are now repository-native and part of the design artifact.
+          - Timed start, active exercise, timeout result and repeat navigation are concretely visualized.
+          - Accessibility constraints remain intact: no per-second live announcement and no flashing countdown.
+          - Revision 3 is ready for human approval.
+
+          ## Open questions
+
+          - Q-UX-001: Confirm these exact three mockups are the visual contract for FEATURE-002.
+          - Q-UX-002: Confirm `Точность: Z%` remains secondary/optional.
+          - Q-UX-003: Confirm decorative illustrations may be technically adapted while preserving layout hierarchy and overall visual concept.
+          EOF
+
+          python3 "$PIPELINE" decide \
+            --feature-dir "$FEATURE" \
+            --stage design \
+            --kind ai \
+            --verdict approved \
+            --feedback-file /tmp/design-ai-review.md
+
+          python3 "$PIPELINE" status --feature-dir "$FEATURE"
+      - name: Commit durable pipeline state
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .ai-sdlc/features/FEATURE-002-timed-training-mode
+          git rm .github/workflows/feature-002-design-r3.yml
+          git commit -m "feat(FEATURE-002): submit design revision 3 with approved mockups"
+          git push origin HEAD:feature/FEATURE-002-timed-training
