@@ -48,10 +48,12 @@ jobs:
             --verdict changes_requested \
             --feedback-file /tmp/design-human-feedback.md
 
+          cp "$FEATURE/03-ux-spec.md" /tmp/feature-002-ux-spec-r2.md
+
           python3 "$PIPELINE" submit \
             --feature-dir "$FEATURE" \
             --stage design \
-            --source "$FEATURE/03-ux-spec.md"
+            --source /tmp/feature-002-ux-spec-r2.md
 
           CURRENT_SHA=$(python3 - <<'PY'
           import json
