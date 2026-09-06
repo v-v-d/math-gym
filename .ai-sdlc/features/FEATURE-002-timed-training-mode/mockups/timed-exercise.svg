@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="844" viewBox="0 0 390 844">
+  <rect width="390" height="844" fill="#f5f8ff"/>
+  <rect x="18" y="18" width="354" height="808" rx="28" fill="#fff" stroke="#e6ebf4"/>
+  <text x="42" y="58" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#12213f">Математический тренажер</text>
+  <text x="42" y="82" font-family="Arial,sans-serif" font-size="11" fill="#8190ab">Практикуйся. Развивайся. У тебя всё получится!</text>
+  <rect x="42" y="112" width="306" height="72" rx="18" fill="#f4f8ff"/>
+  <text x="62" y="142" font-family="Arial,sans-serif" font-size="14" fill="#465571">Решено:</text>
+  <text x="122" y="151" font-family="Arial,sans-serif" font-size="28" font-weight="700" fill="#12213f">12</text>
+  <line x1="185" y1="128" x2="185" y2="168" stroke="#dce3ee"/>
+  <rect x="198" y="120" width="138" height="56" rx="16" fill="#effff5"/>
+  <text x="218" y="140" font-family="Arial,sans-serif" font-size="12" fill="#315a45">Осталось</text>
+  <text x="218" y="164" font-family="Arial,sans-serif" font-size="27" font-weight="700" fill="#11985c">0:34</text>
+  <rect x="42" y="202" width="306" height="226" rx="22" fill="#f2f8ff"/>
+  <text x="195" y="286" text-anchor="middle" font-family="Arial,sans-serif" font-size="54" font-weight="700" fill="#12213f">8 × 7 =</text>
+  <rect x="91" y="318" width="208" height="82" rx="17" fill="#fff" stroke="#2e86f7" stroke-width="3"/>
+  <text x="195" y="374" text-anchor="middle" font-family="Arial,sans-serif" font-size="48" font-weight="700" fill="#12213f">56</text>
+  <g font-family="Arial,sans-serif" font-size="24" font-weight="700" fill="#12213f" text-anchor="middle">
+    <rect x="42" y="450" width="92" height="60" rx="15" fill="#edf4ff"/><text x="88" y="488">1</text>
+    <rect x="149" y="450" width="92" height="60" rx="15" fill="#edf4ff"/><text x="195" y="488">2</text>
+    <rect x="256" y="450" width="92" height="60" rx="15" fill="#edf4ff"/><text x="302" y="488">3</text>
+    <rect x="42" y="520" width="92" height="60" rx="15" fill="#edf4ff"/><text x="88" y="558">4</text>
+    <rect x="149" y="520" width="92" height="60" rx="15" fill="#edf4ff"/><text x="195" y="558">5</text>
+    <rect x="256" y="520" width="92" height="60" rx="15" fill="#edf4ff"/><text x="302" y="558">6</text>
+    <rect x="42" y="590" width="92" height="60" rx="15" fill="#edf4ff"/><text x="88" y="628">7</text>
+    <rect x="149" y="590" width="92" height="60" rx="15" fill="#edf4ff"/><text x="195" y="628">8</text>
+    <rect x="256" y="590" width="92" height="60" rx="15" fill="#edf4ff"/><text x="302" y="628">9</text>
+  </g>
+  <rect x="42" y="660" width="92" height="68" rx="15" fill="#edf0f5"/><text x="88" y="688" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#41516e">⌫</text><text x="88" y="712" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" fill="#41516e">Стереть</text>
+  <rect x="149" y="660" width="92" height="68" rx="15" fill="#edf4ff"/><text x="195" y="705" text-anchor="middle" font-family="Arial,sans-serif" font-size="25" font-weight="700" fill="#12213f">0</text>
+  <rect x="256" y="660" width="92" height="68" rx="15" fill="#2e86f7"/><text x="302" y="691" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#fff">✓</text><text x="302" y="713" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" fill="#fff">Готово</text>
+  <rect x="42" y="754" width="306" height="48" rx="16" fill="#fff8df"/>
+  <text x="195" y="783" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="#12213f">Ты можешь! Каждый пример — шаг к успеху!</text>
+</svg>
