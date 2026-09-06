@@ -1,0 +1,5 @@
+import { describe,it,expect } from 'vitest';
+import { appendDigit,commitSession,deleteDigit,submitAnswer } from '../../src/domain/session';
+import type { Problem } from '../../src/domain/problem';
+const problems=Array.from({length:10},(_,i):Problem=>({id:`p${i}`,grade:1,operation:'add',left:i,right:0,answer:i,display:`${i} + 0`,spoken:`${i} плюс 0`}));
+describe('session',()=>{it('limits input and deletes',()=>{let s:any=commitSession(1,problems,'s',0);s=appendDigit(s,'0');s=appendDigit(s,'0');s=appendDigit(s,'7');s=appendDigit(s,'9');expect(s.answer).toBe('007');s=deleteDigit(s);expect(s.answer).toBe('00');});it('scores after tenth answer',()=>{let s:any=commitSession(1,problems,'s',0);for(let i=0;i<10;i++){s=appendDigit(s,String(i));const r=submitAnswer(s,i+1);expect(r.accepted).toBe(true);s=r.state;}expect(s.screen).toBe('result');expect(s.score).toBe(10);});it('empty submit is ignored',()=>{const s=commitSession(1,problems,'s',0);expect(submitAnswer(s,1).accepted).toBe(false);});});

@@ -1,0 +1,7 @@
+{
+  "mode": "disabled",
+  "decisionOwner": "Product/Deployment owner",
+  "approvedAt": "2026-09-06T00:00:00Z",
+  "jurisdictionScope": "Define production deployment scope",
+  "policyReference": "Link or identifier of approved privacy decision"
+}

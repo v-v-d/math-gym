@@ -1,0 +1,2 @@
+import type { ActiveState, ResultState } from '../domain/session';
+export class SessionAnnouncer { constructor(private el:HTMLElement){} clear(){this.el.textContent='';} answer(v:string){this.el.textContent=v?`Введенный ответ: ${v}`:'Ответ не введен';} task(s:ActiveState){const p=s.problems[s.index];this.el.textContent=`Задание ${s.index+1} из 10. ${p.spoken}. Ответ не введен.`;} result(s:ResultState){const text=s.score===10?'Ура, 10 из 10!':`Готово! ${s.score} из 10`;this.el.textContent=`Занятие завершено. ${text}`;} }
