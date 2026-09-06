@@ -1,0 +1,1 @@
+The visual contract for FEATURE-002 is the exact set of three mockups supplied by the human approver in the design review. The binary assets are tracked in this directory and embedded from `03-ux-spec.md`.

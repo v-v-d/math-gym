@@ -1,0 +1,372 @@
+{
+  "schema_version": 1,
+  "feature_id": "FEATURE-002",
+  "title": "Timed training mode",
+  "created_at": "2026-09-06T20:38:05Z",
+  "updated_at": "2026-09-06T22:21:35Z",
+  "current_stage": "architecture",
+  "waiting_for_human": true,
+  "business_request": {
+    "revision": 2,
+    "sha256": "3cad19b54114a659a0ac49cfffc1d6e2adbeb179431920b5618e6778d4c478a9",
+    "path": "01-business-request.md",
+    "synced_at": "2026-09-06T20:42:34Z"
+  },
+  "artifacts": {
+    "requirements": {
+      "status": "approved",
+      "latest_revision": 2,
+      "current": {
+        "revision": 2,
+        "sha256": "2c47c7e39698354c83bc39999b86044ad18cd2c2ec4f45e2d04c9dec369da933",
+        "path": "02-functional-spec.md",
+        "snapshot": "revisions/requirements/rev-002.md",
+        "submitted_at": "2026-09-06T20:42:34Z"
+      },
+      "ai_review": {
+        "verdict": "approved",
+        "revision": 2,
+        "sha256": "2c47c7e39698354c83bc39999b86044ad18cd2c2ec4f45e2d04c9dec369da933",
+        "at": "2026-09-06T20:42:35Z",
+        "feedback": {
+          "path": "reviews/requirements-ai-r002-20260906T204235Z.md",
+          "sha256": "25d8ae9a4989f451f8194db2fb7793d0bb244e1e8c716f468ee60153039bab45"
+        }
+      },
+      "human_review": {
+        "verdict": "approved",
+        "revision": 2,
+        "sha256": "2c47c7e39698354c83bc39999b86044ad18cd2c2ec4f45e2d04c9dec369da933",
+        "at": "2026-09-06T21:03:09Z",
+        "feedback": null
+      },
+      "feedback": [
+        {
+          "kind": "ai",
+          "verdict": "approved",
+          "revision": 1,
+          "sha256": "ad63d3975ce9f5f9e50b3fc5173a1ff50c65c0cb3a3e6e184cda8f77c1f1581a",
+          "at": "2026-09-06T20:38:05Z",
+          "feedback": {
+            "path": "reviews/requirements-ai-r001-20260906T203805Z.md",
+            "sha256": "07dba3287512f2dfb4a4e20311c442277197e3dad1b84a419c27e524367f3dbb"
+          }
+        },
+        {
+          "kind": "human",
+          "verdict": "changes_requested",
+          "revision": 1,
+          "sha256": "ad63d3975ce9f5f9e50b3fc5173a1ff50c65c0cb3a3e6e184cda8f77c1f1581a",
+          "at": "2026-09-06T20:42:34Z",
+          "feedback": {
+            "path": "reviews/requirements-human-r001-20260906T204234Z.md",
+            "sha256": "503f8a3ba34ad0e487a7dc4245cb82d1016480e675ec766e9a4c157fa911665f"
+          }
+        },
+        {
+          "kind": "ai",
+          "verdict": "approved",
+          "revision": 2,
+          "sha256": "2c47c7e39698354c83bc39999b86044ad18cd2c2ec4f45e2d04c9dec369da933",
+          "at": "2026-09-06T20:42:35Z",
+          "feedback": {
+            "path": "reviews/requirements-ai-r002-20260906T204235Z.md",
+            "sha256": "25d8ae9a4989f451f8194db2fb7793d0bb244e1e8c716f468ee60153039bab45"
+          }
+        }
+      ],
+      "stale": false
+    },
+    "design": {
+      "status": "approved",
+      "latest_revision": 3,
+      "current": {
+        "revision": 3,
+        "sha256": "e08275f6ae867003d23335c2e4afdad493ddc3e17bb50d3d96bba836f46c6960",
+        "path": "03-ux-spec.md",
+        "snapshot": "revisions/design/rev-003.md",
+        "submitted_at": "2026-09-06T22:19:36Z"
+      },
+      "ai_review": {
+        "verdict": "approved",
+        "revision": 3,
+        "sha256": "e08275f6ae867003d23335c2e4afdad493ddc3e17bb50d3d96bba836f46c6960",
+        "at": "2026-09-06T22:19:36Z",
+        "feedback": {
+          "path": "reviews/design-ai-r003-20260906T221936Z.md",
+          "sha256": "6a5177ed73290274132075be8e2d6507372670d20954f2e52d907a0ef27e9103"
+        }
+      },
+      "human_review": {
+        "verdict": "approved",
+        "revision": 3,
+        "sha256": "e08275f6ae867003d23335c2e4afdad493ddc3e17bb50d3d96bba836f46c6960",
+        "at": "2026-09-06T22:21:35Z",
+        "feedback": null
+      },
+      "feedback": [
+        {
+          "kind": "ai",
+          "verdict": "approved",
+          "revision": 1,
+          "sha256": "78590e88ccd941f9bf190dd3bbc0e096af3f8e69396ea792c536703ad59ca0bb",
+          "at": "2026-09-06T21:03:09Z",
+          "feedback": {
+            "path": "reviews/design-ai-r001-20260906T210309Z.md",
+            "sha256": "03e340e680dc2e425a667ce0cfeedb824fee371543d90a501bcfa11c8e9a0337"
+          }
+        },
+        {
+          "kind": "human",
+          "verdict": "changes_requested",
+          "revision": 1,
+          "sha256": "78590e88ccd941f9bf190dd3bbc0e096af3f8e69396ea792c536703ad59ca0bb",
+          "at": "2026-09-06T21:53:38Z",
+          "feedback": {
+            "path": "reviews/design-human-r001-20260906T215338Z.md",
+            "sha256": "9332f79d15ae2226a2338e95b24cd6a0891ce2dc0fa8a8ca79d377816b6c798f"
+          }
+        },
+        {
+          "kind": "ai",
+          "verdict": "approved",
+          "revision": 2,
+          "sha256": "87723b44d79b82d9719883ce68d9729a09e765d4597ac9fa2d3385fb4006b5a1",
+          "at": "2026-09-06T21:53:39Z",
+          "feedback": {
+            "path": "reviews/design-ai-r002-20260906T215339Z.md",
+            "sha256": "5f19eea1bae9183fecf0cc6f90fd0ea90b6dee0cfa80ad3666ab1d1df7cd295f"
+          }
+        },
+        {
+          "kind": "human",
+          "verdict": "changes_requested",
+          "revision": 2,
+          "sha256": "87723b44d79b82d9719883ce68d9729a09e765d4597ac9fa2d3385fb4006b5a1",
+          "at": "2026-09-06T22:19:36Z",
+          "feedback": {
+            "path": "reviews/design-human-r002-20260906T221936Z.md",
+            "sha256": "dbe7160340ae1c717e4711791840a7373352ffde01db7488ef6c7394cb3b60f1"
+          }
+        },
+        {
+          "kind": "ai",
+          "verdict": "approved",
+          "revision": 3,
+          "sha256": "e08275f6ae867003d23335c2e4afdad493ddc3e17bb50d3d96bba836f46c6960",
+          "at": "2026-09-06T22:19:36Z",
+          "feedback": {
+            "path": "reviews/design-ai-r003-20260906T221936Z.md",
+            "sha256": "6a5177ed73290274132075be8e2d6507372670d20954f2e52d907a0ef27e9103"
+          }
+        }
+      ],
+      "stale": false
+    },
+    "architecture": {
+      "status": "waiting_for_human",
+      "latest_revision": 1,
+      "current": {
+        "revision": 1,
+        "sha256": "688fe1c6fc86f622bf840f3a4df1a53a24ff9b9ab6abdd21f5e9bc2188e81fff",
+        "path": "04-architecture.md",
+        "snapshot": "revisions/architecture/rev-001.md",
+        "submitted_at": "2026-09-06T22:21:35Z"
+      },
+      "ai_review": {
+        "verdict": "approved",
+        "revision": 1,
+        "sha256": "688fe1c6fc86f622bf840f3a4df1a53a24ff9b9ab6abdd21f5e9bc2188e81fff",
+        "at": "2026-09-06T22:21:35Z",
+        "feedback": {
+          "path": "reviews/architecture-ai-r001-20260906T222135Z.md",
+          "sha256": "33a680a86e93c8ffa21caf007759387aa646ca9158ad4ee666385fb814e61cdb"
+        }
+      },
+      "human_review": null,
+      "feedback": [
+        {
+          "kind": "ai",
+          "verdict": "approved",
+          "revision": 1,
+          "sha256": "688fe1c6fc86f622bf840f3a4df1a53a24ff9b9ab6abdd21f5e9bc2188e81fff",
+          "at": "2026-09-06T22:21:35Z",
+          "feedback": {
+            "path": "reviews/architecture-ai-r001-20260906T222135Z.md",
+            "sha256": "33a680a86e93c8ffa21caf007759387aa646ca9158ad4ee666385fb814e61cdb"
+          }
+        }
+      ],
+      "stale": false
+    },
+    "test_plan": {
+      "status": "not_started",
+      "latest_revision": 0,
+      "current": null,
+      "ai_review": null,
+      "human_review": null,
+      "feedback": [],
+      "stale": false
+    },
+    "acceptance": {
+      "status": "not_started",
+      "latest_revision": 0,
+      "current": null,
+      "ai_review": null,
+      "human_review": null,
+      "feedback": [],
+      "stale": false
+    }
+  },
+  "implementation": {
+    "stages": []
+  },
+  "history": [
+    {
+      "at": "2026-09-06T20:38:05Z",
+      "action": "init",
+      "business_request": {
+        "revision": 1,
+        "sha256": "4c6144432fa29f97f26a799e65cb8dfaa65b9dc8fcde3d07fa3b99435acf091a",
+        "path": "01-business-request.md",
+        "synced_at": "2026-09-06T20:38:05Z"
+      }
+    },
+    {
+      "at": "2026-09-06T20:38:05Z",
+      "action": "submit",
+      "stage": "requirements",
+      "revision": 1,
+      "sha256": "ad63d3975ce9f5f9e50b3fc5173a1ff50c65c0cb3a3e6e184cda8f77c1f1581a"
+    },
+    {
+      "at": "2026-09-06T20:38:05Z",
+      "action": "decide",
+      "stage": "requirements",
+      "kind": "ai",
+      "verdict": "approved",
+      "revision": 1
+    },
+    {
+      "at": "2026-09-06T20:42:34Z",
+      "action": "decide",
+      "stage": "requirements",
+      "kind": "human",
+      "verdict": "changes_requested",
+      "revision": 1
+    },
+    {
+      "at": "2026-09-06T20:42:34Z",
+      "action": "sync-business-request",
+      "revision": 2,
+      "sha256": "3cad19b54114a659a0ac49cfffc1d6e2adbeb179431920b5618e6778d4c478a9"
+    },
+    {
+      "at": "2026-09-06T20:42:34Z",
+      "action": "submit",
+      "stage": "requirements",
+      "revision": 2,
+      "sha256": "2c47c7e39698354c83bc39999b86044ad18cd2c2ec4f45e2d04c9dec369da933"
+    },
+    {
+      "at": "2026-09-06T20:42:35Z",
+      "action": "decide",
+      "stage": "requirements",
+      "kind": "ai",
+      "verdict": "approved",
+      "revision": 2
+    },
+    {
+      "at": "2026-09-06T21:03:09Z",
+      "action": "decide",
+      "stage": "requirements",
+      "kind": "human",
+      "verdict": "approved",
+      "revision": 2
+    },
+    {
+      "at": "2026-09-06T21:03:09Z",
+      "action": "submit",
+      "stage": "design",
+      "revision": 1,
+      "sha256": "78590e88ccd941f9bf190dd3bbc0e096af3f8e69396ea792c536703ad59ca0bb"
+    },
+    {
+      "at": "2026-09-06T21:03:09Z",
+      "action": "decide",
+      "stage": "design",
+      "kind": "ai",
+      "verdict": "approved",
+      "revision": 1
+    },
+    {
+      "at": "2026-09-06T21:53:38Z",
+      "action": "decide",
+      "stage": "design",
+      "kind": "human",
+      "verdict": "changes_requested",
+      "revision": 1
+    },
+    {
+      "at": "2026-09-06T21:53:39Z",
+      "action": "submit",
+      "stage": "design",
+      "revision": 2,
+      "sha256": "87723b44d79b82d9719883ce68d9729a09e765d4597ac9fa2d3385fb4006b5a1"
+    },
+    {
+      "at": "2026-09-06T21:53:39Z",
+      "action": "decide",
+      "stage": "design",
+      "kind": "ai",
+      "verdict": "approved",
+      "revision": 2
+    },
+    {
+      "at": "2026-09-06T22:19:36Z",
+      "action": "decide",
+      "stage": "design",
+      "kind": "human",
+      "verdict": "changes_requested",
+      "revision": 2
+    },
+    {
+      "at": "2026-09-06T22:19:36Z",
+      "action": "submit",
+      "stage": "design",
+      "revision": 3,
+      "sha256": "e08275f6ae867003d23335c2e4afdad493ddc3e17bb50d3d96bba836f46c6960"
+    },
+    {
+      "at": "2026-09-06T22:19:36Z",
+      "action": "decide",
+      "stage": "design",
+      "kind": "ai",
+      "verdict": "approved",
+      "revision": 3
+    },
+    {
+      "at": "2026-09-06T22:21:35Z",
+      "action": "decide",
+      "stage": "design",
+      "kind": "human",
+      "verdict": "approved",
+      "revision": 3
+    },
+    {
+      "at": "2026-09-06T22:21:35Z",
+      "action": "submit",
+      "stage": "architecture",
+      "revision": 1,
+      "sha256": "688fe1c6fc86f622bf840f3a4df1a53a24ff9b9ab6abdd21f5e9bc2188e81fff"
+    },
+    {
+      "at": "2026-09-06T22:21:35Z",
+      "action": "decide",
+      "stage": "architecture",
+      "kind": "ai",
+      "verdict": "approved",
+      "revision": 1
+    }
+  ]
+}

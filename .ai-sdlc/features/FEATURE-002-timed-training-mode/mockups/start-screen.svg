@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="844" viewBox="0 0 390 844">
+  <rect width="390" height="844" fill="#f5f8ff"/>
+  <rect x="18" y="18" width="354" height="808" rx="28" fill="#fff" stroke="#e6ebf4"/>
+  <text x="42" y="58" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#12213f">Математический тренажер</text>
+  <text x="42" y="82" font-family="Arial,sans-serif" font-size="11" fill="#8190ab">Практикуйся. Развивайся. У тебя всё получится!</text>
+  <text x="42" y="128" font-family="Arial,sans-serif" font-size="28" font-weight="700" fill="#12213f">Выбери класс</text>
+  <rect x="42" y="150" width="306" height="82" rx="18" fill="#f3f8ff" stroke="#2e86f7" stroke-width="2"/>
+  <circle cx="316" cy="191" r="14" fill="#2e86f7"/><path d="M309 191l5 5 9-11" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+  <text x="66" y="183" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#12213f">1 класс</text>
+  <text x="66" y="207" font-family="Arial,sans-serif" font-size="13" fill="#687793">Сложение и вычитание до 100</text>
+  <rect x="42" y="244" width="306" height="82" rx="18" fill="#fff" stroke="#dfe5ee"/>
+  <circle cx="316" cy="285" r="13" fill="#fff" stroke="#cbd3df" stroke-width="2"/>
+  <text x="66" y="277" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#12213f">2 класс</text>
+  <text x="66" y="301" font-family="Arial,sans-serif" font-size="13" fill="#687793">Умножение и деление · таблица 1–10</text>
+  <text x="42" y="380" font-family="Arial,sans-serif" font-size="28" font-weight="700" fill="#12213f">Режим</text>
+  <rect x="42" y="402" width="306" height="92" rx="18" fill="#fff" stroke="#dfe5ee"/>
+  <circle cx="316" cy="448" r="13" fill="#fff" stroke="#cbd3df" stroke-width="2"/>
+  <text x="66" y="438" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#12213f">Обычный</text>
+  <text x="66" y="462" font-family="Arial,sans-serif" font-size="13" fill="#687793">10 примеров без ограничения времени</text>
+  <rect x="42" y="508" width="306" height="106" rx="18" fill="#f0fff6" stroke="#13b86f" stroke-width="2"/>
+  <circle cx="316" cy="561" r="14" fill="#13b86f"/><path d="M309 561l5 5 9-11" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+  <text x="66" y="548" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#12213f">На время</text>
+  <text x="66" y="573" font-family="Arial,sans-serif" font-size="13" fill="#687793">60 секунд · решай столько,</text>
+  <text x="66" y="592" font-family="Arial,sans-serif" font-size="13" fill="#687793">сколько успеешь</text>
+  <rect x="42" y="646" width="306" height="72" rx="18" fill="#fff8df"/>
+  <text x="66" y="676" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#12213f">Быстрее, выше, умнее!</text>
+  <text x="66" y="698" font-family="Arial,sans-serif" font-size="12" fill="#7b879c">Маленькие шаги — к большим победам!</text>
+  <rect x="42" y="744" width="306" height="58" rx="16" fill="#2e86f7"/>
+  <text x="195" y="780" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#fff">Начать →</text>
+</svg>
