@@ -1,0 +1,4 @@
+// @vitest-environment jsdom
+import { describe,it,expect,vi,beforeEach } from 'vitest';
+import { Metrika } from '../../src/analytics/metrika';
+describe('Metrika',()=>{beforeEach(()=>{delete (window as any).ym});it('allowlists payload and never throws',()=>{const ym=vi.fn();(window as any).ym=ym;const m=new Metrika(()=>true);expect(m.send('answer_submitted',{session_id:'s',grade:1,timestamp:1,problem_number:1,entered_answer:'secret',expression:'1+1'})).toBe(true);expect(ym).toHaveBeenCalledWith(112317340,'reachGoal','answer_submitted',{session_id:'s',grade:1,timestamp:1,problem_number:1});});it('does nothing when disabled',()=>{(window as any).ym=vi.fn();const m=new Metrika(()=>false);expect(m.send('session_started',{session_id:'s'})).toBe(false);expect((window as any).ym).not.toHaveBeenCalled();});});

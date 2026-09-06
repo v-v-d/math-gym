@@ -1,0 +1,7 @@
+{
+  "mode": "disabled",
+  "decisionOwner": "local-build",
+  "approvedAt": "1970-01-01T00:00:00.000Z",
+  "jurisdictionScope": "local/test",
+  "policyReference": "env override"
+}
