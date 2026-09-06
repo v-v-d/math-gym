@@ -1,7 +1,7 @@
 # UX/UI specification
 
 - Feature ID: FEATURE-002
-- Revision: 1
+- Revision: 2
 - Input revisions: requirements revision 2 / SHA-256: 2c47c7e39698354c83bc39999b86044ad18cd2c2ec4f45e2d04c9dec369da933
 - Author role: Designer
 
@@ -13,6 +13,7 @@
 - После каждого принятого ответа мгновенно переводить пользователя к следующей задаче без промежуточного экрана.
 - На timeout однозначно объяснить причину завершения и показать два результата: сколько решено и сколько правильно.
 - Сохранить текущую клавиатуру, правила ввода, кнопки результата и mobile-first компоновку.
+- Для каждого ключевого UI-состояния приложить визуальный макет как обязательную часть design artifact.
 - Не использовать анимации или live-announcements, которые отвлекают от быстрого решения.
 
 ## Requirement mapping
@@ -46,7 +47,7 @@
 
 1. Пользователь выбирает класс.
 2. Выбирает `На время`.
-3. Под названием режима видит пояснение `Решай столько примеров, сколько успеешь за 60 секунд`.
+3. Под названием режима видит пояснение `60 секунд · решай столько, сколько успеешь`.
 4. Нажимает `Начать`.
 5. Открывается SCREEN-002 с первым примером и таймером `Осталось 1:00`.
 6. Пользователь вводит ответ и нажимает `Готово` либо Enter.
@@ -99,6 +100,10 @@ Reload на SCREEN-002 ведет в обычное начальное сост�
 - режим по умолчанию не выбран, чтобы timed-ограничение нельзя было включить случайно;
 - при возврате через `Выбрать класс и режим` выбор сбрасывается.
 
+**Mockup:** [`mockups/start-screen.svg`](mockups/start-screen.svg)
+
+![SCREEN-001 — стартовый экран](mockups/start-screen.svg)
+
 ### SCREEN-002 Timed exercise
 
 Карточка упражнения сохраняет знакомую структуру FEATURE-001.
@@ -128,6 +133,10 @@ Reload на SCREEN-002 ведет в обычное начальное сост�
 - отдельный success/error feedback по правильности не показывается;
 - никаких модальных окон и кнопки `Следующий` нет.
 
+**Mockup:** [`mockups/timed-exercise.svg`](mockups/timed-exercise.svg)
+
+![SCREEN-002 — timed exercise](mockups/timed-exercise.svg)
+
 ### SCREEN-003 Timed result
 
 Контент:
@@ -141,6 +150,10 @@ Reload на SCREEN-002 ведет в обычное начальное сост�
 - кнопка `Выбрать класс и режим`.
 
 Для результата `0 / 0` используется нейтральный текст без негативной оценки: `За эту минуту ответы не были отправлены. Попробуй еще раз.`
+
+**Mockup:** [`mockups/timed-result.svg`](mockups/timed-result.svg)
+
+![SCREEN-003 — timed result](mockups/timed-result.svg)
 
 ## Component behavior
 
@@ -221,17 +234,27 @@ Reload на SCREEN-002 ведет в обычное начальное сост�
 - Permissions: permission states отсутствуют, потому что приложение не использует auth/roles.
 - Reload: возврат на SCREEN-001 без resume banner.
 
-## Prototype evidence
+## Prototype / mockup evidence
 
-Отдельный интерактивный prototype не требуется для revision 1: изменение укладывается в существующую UI-систему selectable cards, exercise card, keypad и result card. Перед implementation визуальная проверка должна быть выполнена в реальном приложении на desktop и 320–380 px mobile width.
+Визуальные макеты являются **частью UX/UI specification и частью design revision**, а не отдельным неформальным приложением. Human approval design stage применяется к текстовой спецификации вместе с указанными ниже макетами.
+
+| Screen | Artifact | Purpose |
+|---|---|---|
+| SCREEN-001 | `mockups/start-screen.svg` | Выбор класса и нового режима тренировки |
+| SCREEN-002 | `mockups/timed-exercise.svg` | Основной timed-flow: solved counter, countdown, задача и keypad |
+| SCREEN-003 | `mockups/timed-result.svg` | Автозавершение и итоговые показатели |
+
+Макеты фиксируют layout, визуальную иерархию, ключевые тексты, controls и состояния. Они не являются pixel-perfect contract: итоговая реализация должна использовать существующую UI-систему FEATURE-001 и сохранять accessibility/responsive требования этой спецификации.
 
 ## Assumptions
 
 - UX принимает утвержденную requirements-семантику: timed — дополнительный режим, результат содержит correct_count и solved_count, задачи не повторяются до исчерпания пула, countdown стартует вместе с первым активным timed-task.
 - Ordinary mode сохраняет текущий visual treatment FEATURE-001, кроме появления mode selector перед стартом.
 - Процент точности — только optional secondary information; он не должен мешать обязательным X/Y.
+- Repository-native SVG mockups достаточны для design human gate; отдельный Figma/high-fidelity prototype не требуется, пока human reviewer явно не запросит его.
 
 ## Open questions
 
-- Q-UX-001: Нужен ли дополнительный показатель `Точность Z%` на результате? В revision 1 он оставлен optional и не влияет на acceptance.
-- Q-UX-002: Нужна ли визуальная индикация последних 10 секунд более сильная, чем weight/color? Моргание намеренно исключено из-за accessibility и отвлечения.
+- Q-UX-001: Подтвердить, что макеты SCREEN-001/002/003 являются достаточным визуальным контрактом для перехода к архитектуре.
+- Q-UX-002: Нужен ли дополнительный показатель `Точность Z%` на результате? В revision 2 он оставлен optional и не влияет на acceptance.
+- Q-UX-003: Нужна ли визуальная индикация последних 10 секунд более сильная, чем weight/color? Моргание намеренно исключено из-за accessibility и отвлечения.
